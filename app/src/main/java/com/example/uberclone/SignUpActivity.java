@@ -44,6 +44,8 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         Toolbar tlbSignUp = findViewById(R.id.tlbSignUp);
+        edtUsername = findViewById(R.id.edtSignUpUsername);
+        edtPassword = findViewById(R.id.edtSignUpPassword);
         setSupportActionBar(tlbSignUp);
         if (ParseUser.getCurrentUser()!=null){
             transitionToPassengerActivity();
@@ -98,8 +100,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void signUpParseUser(){
         try {
-            edtUsername = findViewById(R.id.edtSignUpUsername);
-            edtPassword = findViewById(R.id.edtSignUpPassword);
+
             progressDialog = new ProgressDialog(this);
             progressDialog.setMessage("Signing Up...");
             progressDialog.show();

@@ -49,6 +49,7 @@ public class SignUpActivity extends AppCompatActivity {
         setSupportActionBar(tlbSignUp);
         if (ParseUser.getCurrentUser()!=null){
             transitionToPassengerActivity();
+            transitionToDriverActivity();
         }
         state = State.SIGNUP;
         rdbPassenger = findViewById(R.id.rdbPassenger);
@@ -85,9 +86,8 @@ public class SignUpActivity extends AppCompatActivity {
                         user.saveInBackground(new SaveCallback() {
                             @Override
                             public void done(ParseException e) {
-                                if (e == null){
-                                    transitionToPassengerActivity();
-                                }
+                               transitionToPassengerActivity();
+                               transitionToDriverActivity();
                             }
                         });
                     }
@@ -123,6 +123,7 @@ public class SignUpActivity extends AppCompatActivity {
                         if (e == null) {
                             Toast.makeText(SignUpActivity.this, edtUsername.getText().toString()
                                     + " is signed up successfully!", Toast.LENGTH_SHORT).show();
+                            transitionToDriverActivity();
                             transitionToPassengerActivity();
                         } else {
                             Toast.makeText(SignUpActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -145,6 +146,7 @@ public class SignUpActivity extends AppCompatActivity {
                 if (user != null && e == null){
                     Toast.makeText(SignUpActivity.this, user.getUsername()+" is successfully logged in!", Toast.LENGTH_SHORT).show();
                     transitionToPassengerActivity();
+                    transitionToDriverActivity();
                 }else{
                     Toast.makeText(SignUpActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
@@ -155,13 +157,24 @@ public class SignUpActivity extends AppCompatActivity {
     private void transitionToPassengerActivity(){
         if (ParseUser.getCurrentUser().get("userType").equals("Passenger")){
             startActivity(new Intent(this,PassengerActivity.class));
+            finish();
         }
     }
+
+    private void transitionToDriverActivity(){
+        if (ParseUser.getCurrentUser().get("userType").equals("Driver")){
+            startActivity(new Intent(this,DriverRequestListActivity.class));
+            finish();
+        }
+    }
+
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
         getMenuInflater().inflate(R.menu.my_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){

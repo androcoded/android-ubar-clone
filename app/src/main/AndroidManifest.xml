@@ -10,7 +10,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:name=".UberParse"
@@ -34,8 +34,12 @@
             android:value="@string/google_maps_key" />
 
         <activity
+            android:name=".ViewLocationMapActivity"
+            android:label="@string/title_activity_view_location_map"></activity>
+        <activity android:name=".DriverRequestListActivity" />
+        <activity
             android:name=".PassengerActivity"
-            android:label="@string/title_activity_passenger"></activity>
+            android:label="@string/title_activity_passenger" />
         <activity android:name=".SignUpActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
